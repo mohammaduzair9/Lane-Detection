@@ -33,6 +33,25 @@ class LaneLineDetector {
 			return cleaned_image;
 		}
 
+		Mat detect_yellow_white(Mat image) {
+		
+			Scalar yellow_low = Scalar(0, 60, 60);
+			Scalar yellow_high = Scalar(30, 255, 255);
+
+			Mat mask1, mask2, mask3;
+			Mat yelwhite;
+			
+			inRange(image, yellow_low, yellow_high, mask1);
+			
+			inRange(image, 200, 255, mask2);
+
+			bitwise_or(mask1, mask2, mask3);
+
+			bitwise_and(image, mask3, yelwhite);
+
+			return yelwhite;
+		}
+		
 
 		
 };
