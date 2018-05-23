@@ -24,6 +24,15 @@ class LaneLineDetector {
 			return gray_image;
 		}
 		
+		Mat clean_image(Mat image) {
+		
+			Mat cleaned_image;
+			Size blur_kernel_size(5,5);
+			GaussianBlur(image, cleaned_image, blur_kernel_size, 0, 0);
+
+			return cleaned_image;
+		}
+
 
 		
 };
