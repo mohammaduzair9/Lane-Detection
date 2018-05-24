@@ -209,6 +209,37 @@ class LaneLineDetector {
 			return lane_vertices;
 		}
 
+		void drawLanes(vector<Point> lanePoints, Mat image) {
+			
+			vector<Point> poly_points;
+			Mat drawLanePoints;
+
+			Point line1start = lanePoints[0];
+			Point line1end = lanePoints[1];
+			Point line2start = lanePoints[2];
+			Point line2end = lanePoints[3];
+
+			image.copyTo(drawLanePoints);
+			
+			poly_points.emplace_back(line1start);
+			poly_points.emplace_back(line1end);
+			poly_points.emplace_back(line2end);
+			poly_points.emplace_back(line2start);
+
+			Scalar laneColor = Scalar(0, 0, 0);
+			Scalar lineColor = Scalar(0, 0, 255);
+			int line_thickness = 7;
+			
+			fillConvexPoly(drawLanePoints, poly_points, laneColor, 16, 0);
+			addWeighted(drawLanePoints, 0.3, image, 0.7, 0, image);
+
+			line(image, line1start, line1end, lineColor, line_thickness, 16, 0);
+			line(image, line2start, line2end, lineColor, line_thickness, 16, 0);
+
+			namedWindow("Lane Detection", CV_WINDOW_AUTOSIZE);
+			imshow("Lane Detection", image);
+
+		}
 
 		
 };
