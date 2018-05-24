@@ -52,6 +52,15 @@ class LaneLineDetector {
 			return yelwhite;
 		}
 		
+		Mat detect_edges(Mat image) {
+
+			Mat cannyed_image;
+
+			Canny(image, cannyed_image, 200, 300);
+			
+			return cannyed_image;
+		}
+
 
 		
 };
